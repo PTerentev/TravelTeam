@@ -1,34 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Drawing;
+using MediatR;
 
-namespace TravelTeam.Domain.Entities
+namespace TravelTeam.UseCases.Tour.CreateTour
 {
     /// <summary>
-    /// Tour entity.
+    /// Create tour command.
     /// </summary>
-    public class Tour
+    public class CreateTourCommand : IRequest
     {
-        public int Id { get; set; }
-
         public PointF DestinationLocation { get; set; }
 
         public PointF GatheringPlace { get; set; }
 
+        [Required]
         public DateTime Date { get; set; }
 
+        [Required]
         public string Title { get; set; }
 
+        [Required]
         public string Description { get; set; }
-
-        public MovementType MovementType { get; set; }
 
         public int MovementTypeId { get; set; }
 
-        public ApplicationUser CreatorUser { get; set; }
-
         public string CreatorUserId { get; set; }
-
-        public ICollection<TourParticipant> TourParticipants { get; set; }
     }
 }

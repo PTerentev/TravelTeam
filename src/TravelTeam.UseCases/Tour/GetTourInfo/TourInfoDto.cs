@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using TravelTeam.Domain.Entities;
 
-namespace TravelTeam.Domain.Entities
+namespace TravelTeam.UseCases.Tour.GetTourInfo
 {
-    /// <summary>
-    /// Tour entity.
-    /// </summary>
-    public class Tour
+    public class TourInfoDto
     {
         public int Id { get; set; }
 
@@ -23,11 +21,7 @@ namespace TravelTeam.Domain.Entities
 
         public MovementType MovementType { get; set; }
 
-        public int MovementTypeId { get; set; }
-
         public ApplicationUser CreatorUser { get; set; }
-
-        public string CreatorUserId { get; set; }
 
         public ICollection<TourParticipant> TourParticipants { get; set; }
     }

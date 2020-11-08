@@ -7,7 +7,7 @@ namespace TravelTeam.Domain.Entities
     /// <summary>
     /// Tour participants.
     /// </summary>
-    public class TourParticipants
+    public class TourParticipant
     {
         public int Id { get; set; }
 

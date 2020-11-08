@@ -5,7 +5,15 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelTeam.Web", "TravelTeam.Web\TravelTeam.Web.csproj", "{22F548DE-3F68-45CB-9D37-83E1413CEACF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelTeam.Domain", "TravelTeam.Domain\TravelTeam.Domain.csproj", "{3E4317A5-55E9-4B1E-BDEC-BCABC91D5895}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelTeam.Domain", "TravelTeam.Domain\TravelTeam.Domain.csproj", "{3E4317A5-55E9-4B1E-BDEC-BCABC91D5895}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelTeam.UseCases", "TravelTeam.UseCases\TravelTeam.UseCases.csproj", "{A29BC399-5FF2-4C25-BD5D-78E6B0D6A898}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelTeam.DataAccess", "TravelTeam.DataAccess\TravelTeam.DataAccess.csproj", "{D73CD3A2-B468-4578-998D-AA558D3DA07C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelTeam.Abstractions", "TravelTeam.Abstractions\TravelTeam.Abstractions.csproj", "{D55E0459-CB23-4B5D-B35E-0379D7E129F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelTeam.Infrastructure", "TravelTeam.Infrastructure\TravelTeam.Infrastructure.csproj", "{E738FFA5-5DF8-4FCF-994D-20888AE9697B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,22 @@ Global
 		{3E4317A5-55E9-4B1E-BDEC-BCABC91D5895}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E4317A5-55E9-4B1E-BDEC-BCABC91D5895}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E4317A5-55E9-4B1E-BDEC-BCABC91D5895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A29BC399-5FF2-4C25-BD5D-78E6B0D6A898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A29BC399-5FF2-4C25-BD5D-78E6B0D6A898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A29BC399-5FF2-4C25-BD5D-78E6B0D6A898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A29BC399-5FF2-4C25-BD5D-78E6B0D6A898}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D73CD3A2-B468-4578-998D-AA558D3DA07C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D73CD3A2-B468-4578-998D-AA558D3DA07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D73CD3A2-B468-4578-998D-AA558D3DA07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D73CD3A2-B468-4578-998D-AA558D3DA07C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D55E0459-CB23-4B5D-B35E-0379D7E129F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D55E0459-CB23-4B5D-B35E-0379D7E129F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D55E0459-CB23-4B5D-B35E-0379D7E129F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D55E0459-CB23-4B5D-B35E-0379D7E129F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E738FFA5-5DF8-4FCF-994D-20888AE9697B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E738FFA5-5DF8-4FCF-994D-20888AE9697B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E738FFA5-5DF8-4FCF-994D-20888AE9697B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E738FFA5-5DF8-4FCF-994D-20888AE9697B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

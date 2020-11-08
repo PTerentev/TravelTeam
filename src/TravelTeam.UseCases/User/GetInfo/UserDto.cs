@@ -1,12 +1,11 @@
 ﻿using System;
-using Microsoft.AspNetCore.Identity;
 
-namespace TravelTeam.Domain.Entities
+namespace TravelTeam.UseCases.User.GetInfo
 {
     /// <summary>
-    /// User with additional information.
+    /// UserDto.
     /// </summary>
-    public class ApplicationUser : IdentityUser
+    public class UserDto
     {
         public DateTime DateOfBirth { get; set; }
 
@@ -17,5 +16,11 @@ namespace TravelTeam.Domain.Entities
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string Username { get; set; }
+
+        public string Email { get; set; }
     }
 }
