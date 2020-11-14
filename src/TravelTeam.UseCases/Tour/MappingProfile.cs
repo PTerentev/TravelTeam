@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace TravelTeam.UseCases.Tour.GetTourInfo
+namespace TravelTeam.UseCases.Tour
 {
     internal class MappingProfile : Profile
     {

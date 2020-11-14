@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using TravelTeam.Domain.Entities;
 
-namespace TravelTeam.UseCases.Tour.GetTourInfo
+namespace TravelTeam.UseCases.Tour
 {
     public class TourInfoDto
     {
