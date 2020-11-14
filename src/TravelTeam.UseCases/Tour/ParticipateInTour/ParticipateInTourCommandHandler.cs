@@ -3,18 +3,21 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Saritasa.Tools.Domain.Exceptions;
-using TravelTeam.Abstractions.Data;
+using TravelTeam.DataAccess;
 
 namespace TravelTeam.UseCases.Tour.ParticipateInTour
 {
+    /// <summary>
+    /// Participate in tour command handler.
+    /// </summary>
     internal class ParticipateInTourCommandHandler : IRequestHandler<ParticipateInTourCommand>
     {
-        private readonly IApplicationDbContext applicationDbContext;
+        private readonly ApplicationDbContext applicationDbContext;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public ParticipateInTourCommandHandler(IApplicationDbContext applicationDbContext)
+        public ParticipateInTourCommandHandler(ApplicationDbContext applicationDbContext)
         {
             this.applicationDbContext = applicationDbContext;
         }

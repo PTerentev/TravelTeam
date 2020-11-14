@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using TravelTeam.Domain.Entities;
 
-namespace TravelTeam.UseCases.Tour
+namespace TravelTeam.UseCases.Common
 {
-    public class TourInfoDto
+    public class TourDto
     {
         public int Id { get; set; }
 
@@ -21,8 +21,8 @@ namespace TravelTeam.UseCases.Tour
 
         public MovementType MovementType { get; set; }
 
-        public ApplicationUser CreatorUser { get; set; }
+        public UserDto CreatorUser { get; set; }
 
-        public ICollection<TourParticipant> TourParticipants { get; set; }
+        public IEnumerable<string> TourParticipantsIds { get; set; }
     }
 }

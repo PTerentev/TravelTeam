@@ -4,6 +4,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using TravelTeam.Domain.Entities;
+using TravelTeam.UseCases.Common;
 
 namespace TravelTeam.UseCases.User.GetInfo
 {

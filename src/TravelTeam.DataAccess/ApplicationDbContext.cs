@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TravelTeam.Abstractions.Data;
 using TravelTeam.Domain.Entities;
 
 namespace TravelTeam.DataAccess
@@ -8,7 +7,7 @@ namespace TravelTeam.DataAccess
     /// <summary>
     /// Application database context.
     /// </summary>
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         /// <summary>
         /// Constructor.
@@ -18,13 +17,19 @@ namespace TravelTeam.DataAccess
             Database.EnsureCreated();
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Tours table.
+        /// </summary>
         public DbSet<Tour> Tours { get; private set; }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Tour participants table.
+        /// </summary>
         public DbSet<TourParticipant> TourParticipants { get; private set; }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Movement types.
+        /// </summary>
         public DbSet<MovementType> MovementTypes { get; private set; }
     }
 }

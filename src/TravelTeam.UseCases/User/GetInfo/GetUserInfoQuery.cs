@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using TravelTeam.UseCases.Common;
 
 namespace TravelTeam.UseCases.User.GetInfo
 {

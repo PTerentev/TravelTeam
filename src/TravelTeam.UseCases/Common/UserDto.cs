@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TravelTeam.UseCases.User.GetInfo
+namespace TravelTeam.UseCases.Common
 {
     /// <summary>
     /// UserDto.

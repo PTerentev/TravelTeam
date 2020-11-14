@@ -19,6 +19,7 @@ namespace TravelTeam.UseCases.User.Login
         /// Password.
         /// </summary>
         [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }

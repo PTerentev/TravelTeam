@@ -4,8 +4,14 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace TravelTeam.Web.Infrastructure.ServiceExtensions
 {
+    /// <summary>
+    /// Swagger service extension.
+    /// </summary>
     internal static class SwaggerServiceExtension
     {
+        /// <summary>
+        /// Add swagger services.
+        /// </summary>
         public static IServiceCollection AddSwaggerServices(this IServiceCollection services)
         {
             services.AddSwaggerGen(Setup);

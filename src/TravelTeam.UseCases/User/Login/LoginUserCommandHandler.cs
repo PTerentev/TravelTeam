@@ -35,7 +35,9 @@ namespace TravelTeam.UseCases.User.Login
         /// <inheritdoc/>
         public async Task<LoginUserCommandResult> Handle(LoginUserCommand request, CancellationToken cancellationToken)
         {
-            var result = await signInManager.PasswordSignInAsync(request.Email, request.Password, false, false);
+            var user = await userManager.FindByEmailAsync(request.Email);
+
+            var result = await signInManager.PasswordSignInAsync(user.UserName, request.Password, false, false);
             if (!result.Succeeded)
             {
                 if (result.IsNotAllowed)
@@ -47,12 +49,6 @@ namespace TravelTeam.UseCases.User.Login
                     throw new DomainException($"User {request.Email} is locked out.");
                 }
                 throw new DomainException("Email or password is incorrect.");
-            }
-
-            var user = await userManager.FindByEmailAsync(request.Email);
-            if (user == null)
-            {
-                throw new DomainException($"User with email {request.Email} not found.");
             }
 
             var principal = await signInManager.CreateUserPrincipalAsync(user);

@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
+using System.Linq;
 using TravelTeam.Domain.Entities;
 
-namespace TravelTeam.UseCases.User.GetInfo
+namespace TravelTeam.UseCases.Common
 {
     /// <summary>
-    /// Get user info mapping profile.
+    /// Common mapping profile.
     /// </summary>
     internal class MappingProfile : Profile
     {
@@ -14,6 +15,11 @@ namespace TravelTeam.UseCases.User.GetInfo
         public MappingProfile()
         {
             CreateMap<ApplicationUser, UserDto>();
+
+            CreateMap<Domain.Entities.Tour, TourDto>()
+                .ForMember(
+                dto => dto.TourParticipantsIds,
+                opt => opt.MapFrom(tour => tour.TourParticipants.Select(part => part.UserId)));
         }
     }
 }

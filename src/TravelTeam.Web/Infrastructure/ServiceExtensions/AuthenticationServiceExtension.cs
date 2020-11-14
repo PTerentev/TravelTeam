@@ -7,12 +7,18 @@ using TravelTeam.Domain.Options;
 
 namespace TravelTeam.Web.Infrastructure.ServiceExtensions
 {
+    /// <summary>
+    /// Authentication service extension.
+    /// </summary>
     internal static class AuthenticationServiceExtension
     {
+        /// <summary>
+        /// Add authentication services.
+        /// </summary>s
         public static IServiceCollection AddAuthenticationServices(this IServiceCollection services, IConfiguration configuration)
         {
             var jwtOptions = new JwtOptions();
-            configuration.Bind("JwtSettings", jwtOptions);
+            configuration.Bind(JwtOptions.Name, jwtOptions);
 
             services.AddAuthentication(options =>
             {

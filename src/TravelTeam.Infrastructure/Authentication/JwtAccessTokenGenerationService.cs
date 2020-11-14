@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using TravelTeam.Abstractions.Infrastructure;
@@ -15,29 +15,34 @@ namespace TravelTeam.Infrastructure.Authentication
     /// </summary>
     public class JwtAccessTokenGenerationService : IAccessTokenGenerationService
     {
-        private readonly JwtOptions jwtOptions;
+        private readonly TokenValidationParameters tokenValidationParameters;
+        private readonly JwtOptions options;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public JwtAccessTokenGenerationService(IOptions<JwtOptions> jwtOptions)
+        public JwtAccessTokenGenerationService(IOptionsMonitor<JwtBearerOptions> jwtOptionsMonitor, IOptions<JwtOptions> options)
         {
-            this.jwtOptions = jwtOptions.Value;
+            this.options = options.Value;
+
+            this.tokenValidationParameters = jwtOptionsMonitor.Get(JwtBearerDefaults.AuthenticationScheme)
+                .TokenValidationParameters.Clone();
+            // For this we don't need to validate lifetime because we don't use validation here at all.
+            this.tokenValidationParameters.ValidateLifetime = false;
         }
+
 
         /// <inheritdoc/>
         public string GenerateToken(IEnumerable<Claim> claims)
         {
             var jwtSecurityToken = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.UtcNow.AddSeconds(jwtOptions.ExpirationTimeSeconds),
-                issuer: jwtOptions.Issuer,
-                audience: jwtOptions.Audience,
-                signingCredentials:
-                    new SigningCredentials(
-                        new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.SecretKey)), 
-                        SecurityAlgorithms.HmacSha256)
-            );
+               claims: claims,
+               expires: DateTime.UtcNow.AddSeconds(options.ExpirationTimeSeconds),
+               issuer: tokenValidationParameters.ValidIssuer,
+               audience: tokenValidationParameters.ValidAudience,
+               signingCredentials:
+                   new SigningCredentials(tokenValidationParameters.IssuerSigningKey, SecurityAlgorithms.HmacSha256));
+
             return new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
         }
 
@@ -47,15 +52,7 @@ namespace TravelTeam.Infrastructure.Authentication
             var principal = new JwtSecurityTokenHandler()
                 .ValidateToken(
                 token, 
-                new TokenValidationParameters()
-                {
-                    ValidateIssuerSigningKey = true,
-                    ValidateIssuer = true,
-                    ValidateAudience = false,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.SecretKey)),
-                    ValidIssuer = jwtOptions.Issuer,
-                    ValidateLifetime = false
-                }, 
+                tokenValidationParameters, 
                 out SecurityToken _);
             return principal.Claims;
         }

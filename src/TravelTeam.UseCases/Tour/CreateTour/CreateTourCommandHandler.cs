@@ -2,30 +2,38 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using TravelTeam.Abstractions.Data;
+using Microsoft.EntityFrameworkCore;
+using Saritasa.Tools.Domain.Exceptions;
+using TravelTeam.DataAccess;
+using TravelTeam.UseCases.Common;
 
 namespace TravelTeam.UseCases.Tour.CreateTour
 {
     /// <summary>
     /// Create tour command handler.
     /// </summary>
-    internal class CreateTourCommandHandler : IRequestHandler<CreateTourCommand>
+    internal class CreateTourCommandHandler : IRequestHandler<CreateTourCommand, IdResult<int>>
     {
-        private readonly IApplicationDbContext applicationDbContext;
+        private readonly ApplicationDbContext applicationDbContext;
         private readonly IMapper mapper;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public CreateTourCommandHandler(IApplicationDbContext applicationDbContext, IMapper mapper)
+        public CreateTourCommandHandler(ApplicationDbContext applicationDbContext, IMapper mapper)
         {
             this.applicationDbContext = applicationDbContext;
             this.mapper = mapper;
         }
 
         /// <inheritdoc/>
-        public async Task<Unit> Handle(CreateTourCommand request, CancellationToken cancellationToken)
+        public async Task<IdResult<int>> Handle(CreateTourCommand request, CancellationToken cancellationToken)
         {
+            if (! await applicationDbContext.Users.AnyAsync(u => u.Id == request.CreatorUserId, cancellationToken))
+            {
+                throw new DomainException("Only authorized users can create tours!");
+            }
+
             var tour = mapper.Map<Domain.Entities.Tour>(request);
 
             applicationDbContext.Tours.Add(tour);
@@ -38,7 +46,7 @@ namespace TravelTeam.UseCases.Tour.CreateTour
 
             await applicationDbContext.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return new IdResult<int>(tour.Id);
         }
     }
 }

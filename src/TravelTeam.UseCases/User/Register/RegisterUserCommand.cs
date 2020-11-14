@@ -1,12 +1,13 @@
 ﻿using MediatR;
 using System.ComponentModel.DataAnnotations;
+using TravelTeam.UseCases.Common;
 
 namespace TravelTeam.UseCases.User.Register
 {
     /// <summary>
     /// Register user command.
     /// </summary>
-    public class RegisterUserCommand : IRequest
+    public class RegisterUserCommand : IRequest<IdResult<string>>
     {
         [Required]
         [MaxLength(250)]
@@ -17,6 +18,7 @@ namespace TravelTeam.UseCases.User.Register
         public string Email { get; set; }
 
         [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required]

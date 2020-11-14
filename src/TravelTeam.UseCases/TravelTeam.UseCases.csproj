@@ -3,12 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <CodeAnalysisRuleSet>../../tools/Saritasa.ruleset</CodeAnalysisRuleSet>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="MediatR" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Saritasa.Tools.Common" Version="3.2.2" />
     <PackageReference Include="Saritasa.Tools.Domain" Version="0.8.2" />
     <PackageReference Include="Saritasa.Tools.EFCore3" Version="0.7.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
@@ -23,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TravelTeam.Abstractions\TravelTeam.Abstractions.csproj" />
+    <ProjectReference Include="..\TravelTeam.DataAccess\TravelTeam.DataAccess.csproj" />
     <ProjectReference Include="..\TravelTeam.Domain\TravelTeam.Domain.csproj" />
     <ProjectReference Include="..\TravelTeam.Infrastructure\TravelTeam.Infrastructure.csproj" />
   </ItemGroup>
