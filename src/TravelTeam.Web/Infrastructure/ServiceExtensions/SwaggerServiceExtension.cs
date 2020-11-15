@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using System.IO;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -38,6 +40,12 @@ namespace TravelTeam.Web.Infrastructure.ServiceExtensions
                 BearerFormat = "JWT",
                 Type = SecuritySchemeType.Http
             });
+
+            options.IncludeXmlComments(GetAssemblyLocationByType(typeof(SwaggerServiceExtension)));
+            options.IncludeXmlComments(GetAssemblyLocationByType(typeof(UseCases.Common.UserDto)));
         }
+
+        private static string GetAssemblyLocationByType(Type type) =>
+            Path.Combine(AppContext.BaseDirectory, $"{type.Assembly.GetName().Name}.xml");
     }
 }

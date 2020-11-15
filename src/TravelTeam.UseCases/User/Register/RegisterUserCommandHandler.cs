@@ -38,7 +38,7 @@ namespace TravelTeam.UseCases.User.Register
             {
                 throw new ValidationException(ValidationErrors.CreateFromErrors(
                         "An error occurred in user registration!",
-                        (string[])result.Errors.Select(e => e.Description)));
+                        result.Errors.Select(e => e.Description).ToArray()));
             }
 
             return new IdResult<string>(user.Id);

@@ -1,8 +1,9 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Saritasa.Tools.Domain.Exceptions;
 using TravelTeam.DataAccess;
 using TravelTeam.UseCases.Common;
@@ -14,14 +15,16 @@ namespace TravelTeam.UseCases.Tour.CreateTour
     /// </summary>
     internal class CreateTourCommandHandler : IRequestHandler<CreateTourCommand, IdResult<int>>
     {
+        private readonly ILogger<CreateTourCommandHandler> logger;
         private readonly ApplicationDbContext applicationDbContext;
         private readonly IMapper mapper;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public CreateTourCommandHandler(ApplicationDbContext applicationDbContext, IMapper mapper)
+        public CreateTourCommandHandler(ILogger<CreateTourCommandHandler> logger, ApplicationDbContext applicationDbContext, IMapper mapper)
         {
+            this.logger = logger;
             this.applicationDbContext = applicationDbContext;
             this.mapper = mapper;
         }
@@ -46,6 +49,7 @@ namespace TravelTeam.UseCases.Tour.CreateTour
 
             await applicationDbContext.SaveChangesAsync(cancellationToken);
 
+            logger.LogTrace("A tour with id: {id} was created.", tour.Id);
             return new IdResult<int>(tour.Id);
         }
     }

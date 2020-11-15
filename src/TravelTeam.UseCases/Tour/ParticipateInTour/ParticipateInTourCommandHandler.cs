@@ -25,6 +25,11 @@ namespace TravelTeam.UseCases.Tour.ParticipateInTour
         /// <inheritdoc/>
         public async Task<Unit> Handle(ParticipateInTourCommand request, CancellationToken cancellationToken)
         {
+            if (!await applicationDbContext.Users.AnyAsync(u => u.Id == request.UserId, cancellationToken))
+            {
+                throw new DomainException("Only authorized users can create tours!");
+            }
+
             if (! await applicationDbContext.Tours.AnyAsync(t => t.Id == request.TourId, cancellationToken))
             {
                 throw new NotFoundException($"Cannot find the tour with Id: {request.TourId}");
