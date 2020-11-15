@@ -16,6 +16,6 @@
         /// <summary>
         /// ID.
         /// </summary>
-        public TId Id { get; internal set; }
+        public TId Id { get; }
     }
 }
