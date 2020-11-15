@@ -2,17 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <CodeAnalysisRuleSet>../../tools/Saritasa.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>../../../tools/Saritasa.ruleset</CodeAnalysisRuleSet>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TravelTeam.Abstractions\TravelTeam.Abstractions.csproj" />
     <ProjectReference Include="..\TravelTeam.Domain\TravelTeam.Domain.csproj" />
   </ItemGroup>
 
