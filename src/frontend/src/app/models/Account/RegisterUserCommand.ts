@@ -1,7 +1,7 @@
 export class RegisterUserCommand {
-    username: string;
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
+    public username: string = '';
+    public email: string = '';
+    public password: string = '';
+    public firstName: string = '';
+    public lastName: string = '';
 }

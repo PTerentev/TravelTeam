@@ -1,6 +1,9 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TravelTeam.UseCases.Common;
 using TravelTeam.UseCases.User.GetInfo;
@@ -30,7 +33,7 @@ namespace TravelTeam.Web.Controllers
         /// Register user.
         /// </summary>
         [HttpPost("register")]
-        public async Task<IdResult<string>> Register([FromQuery] RegisterUserCommand registerUserCommand, CancellationToken cancellationToken)
+        public async Task<IdResult<string>> Register([FromBody] RegisterUserCommand registerUserCommand, CancellationToken cancellationToken)
         {
             return await mediator.Send(registerUserCommand, cancellationToken);
         }
@@ -38,8 +41,8 @@ namespace TravelTeam.Web.Controllers
         /// <summary>
         /// Login user.
         /// </summary>
-        [HttpGet("login")]
-        public async Task<LoginUserCommandResult> Login([FromQuery] LoginUserCommand loginUserCommand, CancellationToken cancellationToken)
+        [HttpPost("login")]
+        public async Task<LoginUserCommandResult> Login([FromBody] LoginUserCommand loginUserCommand, CancellationToken cancellationToken)
         {
             return await mediator.Send(loginUserCommand, cancellationToken);
         }
@@ -51,6 +54,26 @@ namespace TravelTeam.Web.Controllers
         public async Task<UserDto> GetInfo([FromQuery] GetUserInfoQuery getUserInfoQuery, CancellationToken cancellationToken)
         {
             return await mediator.Send(getUserInfoQuery, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get user info.
+        /// </summary>
+        [HttpGet("check")]
+        [Authorize]
+        public async Task<bool> CheckToken(CancellationToken cancellationToken)
+        {
+            var userQuery = new GetUserInfoQuery()
+            {
+                UserId = GetUserId()
+            };
+            var userDto = await mediator.Send(userQuery, cancellationToken);
+            return !string.IsNullOrWhiteSpace(userDto.Username);
+        }
+
+        private string GetUserId()
+        {
+            return User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value;
         }
     }
 }

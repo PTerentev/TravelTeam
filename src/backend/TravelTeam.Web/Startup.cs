@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TravelTeam.Abstractions.Infrastructure;
 using TravelTeam.Infrastructure.Authentication;
+using TravelTeam.Web.Infrastructure;
 using TravelTeam.Web.Infrastructure.Initialization;
 using TravelTeam.Web.Infrastructure.Middlewares;
 using TravelTeam.Web.Infrastructure.ServiceExtensions;
@@ -39,7 +40,7 @@ namespace TravelTeam.Web
             services.AddDomainServices(configuration);
 
             services.AddAsyncInitializer<TestDataInitializer>();
-
+            services.AddCorsPolicy();
             services.AddAutoMapper(typeof(UseCases.Common.UserDto).Assembly);
             services.AddMediatR(typeof(UseCases.Common.UserDto).Assembly);
             services.AddScoped<IAccessTokenGenerationService, JwtAccessTokenGenerationService>();
@@ -58,6 +59,11 @@ namespace TravelTeam.Web
                 options.EnableValidator();
                 options.DisplayOperationId();
             });
+
+            if (env.EnvironmentName.Equals("Development", System.StringComparison.InvariantCultureIgnoreCase))
+            {
+                app.UseCors(CorsPolicyNames.DevCorsPolicyName);
+            }
 
             app.UseMiddleware<ApiExceptionMiddleware>();
             app.UseRouting();

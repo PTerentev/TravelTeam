@@ -19,7 +19,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AccountService {
-  backendUrl: "http://localhost:52732/api/account";
+  backendUrl:string = "http://localhost:52732/api/account";
 
   constructor(private http:HttpClient, private router:Router, private serializer:UrlSerializer) { }
 

@@ -65,7 +65,7 @@ namespace TravelTeam.Web.Controllers
         /// Get tours.
         /// </summary>
         [HttpGet("get")]
-        public async Task<PagedListMetadataDto<TourDto>> Get([FromQuery] GetToursQuery getToursQuery, CancellationToken cancellationToken)
+        public async Task<PagedListMetadataDto<TourShortDto>> Get([FromQuery] GetToursQuery getToursQuery, CancellationToken cancellationToken)
         {
             return await mediator.Send(getToursQuery, cancellationToken);
         }

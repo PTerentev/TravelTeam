@@ -5,7 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './login.component.html',
   styleUrls: [
     './login.component.css', 
-    './../../../../node_modules/bootstrap/dist/css/bootstrap.min.css',
     './../../styles/form-styles.css'
   ]
 })

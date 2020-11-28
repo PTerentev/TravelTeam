@@ -1,0 +1,25 @@
+<div class="card text-center my-3 tour">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-sm-3">
+            <img src="../../assets/images/defaultAvatar.png" class="image-card">
+        </div>
+        <div class="col-sm-9 d-flex justify-content-start">
+            <div class="flex-column">
+                <h5 class="text-left">{{ tour.creatorUser.username }}</h5>
+                <h6 class="text-left">{{ tour.creatorUser.firstName }}</h6>
+                <h6 class="text-left">City</h6>
+                <h6 class="text-left">Years</h6>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ tour.title }}</h5>
+      <p class="card-text">{{ tour.description }}</p>
+      <button class="btn btn-primary">Подробнее</button>
+    </div>
+    <div class="card-footer text-muted">
+        {{ tour.date }}
+    </div>
+</div>

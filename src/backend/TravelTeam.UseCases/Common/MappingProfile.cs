@@ -20,6 +20,8 @@ namespace TravelTeam.UseCases.Common
                 .ForMember(
                 dto => dto.TourParticipantsIds,
                 opt => opt.MapFrom(tour => tour.TourParticipants.Select(part => part.UserId)));
+
+            CreateMap<Domain.Entities.Tour, TourShortDto>();
         }
     }
 }
