@@ -8,7 +8,7 @@ namespace TravelTeam.UseCases.Tour.GetTours
     /// <summary>
     /// Get tours query.
     /// </summary>
-    public class GetToursQuery : IRequest<PagedListMetadataDto<TourShortDto>>
+    public class GetToursQuery : IRequest<PagedListMetadataDto<TourDto>>
     {
         /// <summary>
         /// Page number.

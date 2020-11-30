@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TourService } from '../../services/tour.service'
-import { TourShortDto } from '../../models/Tour/TourShortDto'
+import { TourDto } from '../../models/Tour/TourDto'
 import { GetToursQuery } from '../../models/Tour/GetToursQuery'
 
 @Component({
@@ -9,7 +9,7 @@ import { GetToursQuery } from '../../models/Tour/GetToursQuery'
   styleUrls: ['./tours.component.css']
 })
 export class ToursComponent implements OnInit {
-  tours: TourShortDto[];
+  tours: TourDto[];
   constructor(private tourService: TourService) { }
 
   ngOnInit(): void {

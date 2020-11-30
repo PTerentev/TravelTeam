@@ -1,5 +1,7 @@
 ﻿using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -35,6 +37,22 @@ namespace TravelTeam.Web.Infrastructure.ServiceExtensions
                     ValidateAudience = false,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions.SecretKey)),
                     ValidIssuer = jwtOptions.Issuer
+                };
+
+                options.Events = new JwtBearerEvents();
+                options.Events.OnAuthenticationFailed = context =>
+                {
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    return Task.CompletedTask;
+                };
+            })
+            .AddCookie(options =>
+            {
+                options.Events.OnRedirectToAccessDenied =
+                options.Events.OnRedirectToLogin = c =>
+                {
+                    c.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    return Task.FromResult<object>(null);
                 };
             });
 

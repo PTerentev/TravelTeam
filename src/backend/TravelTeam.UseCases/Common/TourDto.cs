@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace TravelTeam.UseCases.Common
 {
@@ -17,12 +16,12 @@ namespace TravelTeam.UseCases.Common
         /// <summary>
         /// Destination location.
         /// </summary>
-        public PointF DestinationLocation { get; set; }
+        public string DestinationLocation { get; set; }
 
         /// <summary>
         /// Gathering place.
         /// </summary>
-        public PointF GatheringPlace { get; set; }
+        public string GatheringPlace { get; set; }
 
         /// <summary>
         /// Date.

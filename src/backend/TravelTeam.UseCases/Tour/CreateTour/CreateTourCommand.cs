@@ -14,12 +14,12 @@ namespace TravelTeam.UseCases.Tour.CreateTour
         /// <summary>
         /// Destination location.
         /// </summary>
-        public PointF DestinationLocation { get; set; }
+        public string DestinationLocation { get; set; }
 
         /// <summary>
         /// Gathering place.
         /// </summary>
-        public PointF GatheringPlace { get; set; }
+        public string GatheringPlace { get; set; }
 
         /// <summary>
         /// Travel start date.
@@ -42,7 +42,8 @@ namespace TravelTeam.UseCases.Tour.CreateTour
         /// <summary>
         /// Movement type ID.
         /// </summary>
-        public int MovementTypeId { get; set; }
+        [Required]
+        public string MovementType { get; set; }
 
         /// <summary>
         /// Creator user ID.

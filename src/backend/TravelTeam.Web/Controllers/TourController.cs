@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Saritasa.Tools.Common.Pagination;
 using TravelTeam.UseCases.Common;
-using TravelTeam.UseCases.Tour;
 using TravelTeam.UseCases.Tour.CreateTour;
 using TravelTeam.UseCases.Tour.GetTourById;
 using TravelTeam.UseCases.Tour.GetTours;
@@ -38,7 +37,7 @@ namespace TravelTeam.Web.Controllers
         /// </summary>
         [Authorize]
         [HttpPost("create")]
-        public async Task<IdResult<int>> Create([FromQuery] CreateTourCommand createTourCommand, CancellationToken cancellationToken)
+        public async Task<IdResult<int>> Create([FromBody] CreateTourCommand createTourCommand, CancellationToken cancellationToken)
         {
             createTourCommand.CreatorUserId = GetUserId();
             return await mediator.Send(createTourCommand, cancellationToken);
@@ -49,7 +48,7 @@ namespace TravelTeam.Web.Controllers
         /// </summary>
         [Authorize]
         [HttpPost("participate")]
-        public async Task<IActionResult> Participate([Required][FromQuery] int tourId, CancellationToken cancellationToken)
+        public async Task<IActionResult> Participate([Required][FromBody] int tourId, CancellationToken cancellationToken)
         {
             var command = new ParticipateInTourCommand()
             {
@@ -65,7 +64,7 @@ namespace TravelTeam.Web.Controllers
         /// Get tours.
         /// </summary>
         [HttpGet("get")]
-        public async Task<PagedListMetadataDto<TourShortDto>> Get([FromQuery] GetToursQuery getToursQuery, CancellationToken cancellationToken)
+        public async Task<PagedListMetadataDto<TourDto>> Get([FromQuery] GetToursQuery getToursQuery, CancellationToken cancellationToken)
         {
             return await mediator.Send(getToursQuery, cancellationToken);
         }

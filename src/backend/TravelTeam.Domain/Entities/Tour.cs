@@ -9,28 +9,59 @@ namespace TravelTeam.Domain.Entities
     /// </summary>
     public class Tour
     {
+        /// <summary>
+        /// Id.
+        /// </summary>
         public int Id { get; set; }
 
-        public PointF DestinationLocation { get; set; }
+        /// <summary>
+        /// Destination location.
+        /// </summary>
+        public string DestinationLocation { get; set; }
 
-        public PointF GatheringPlace { get; set; }
+        /// <summary>
+        /// Gathering place.
+        /// </summary>
+        public string GatheringPlace { get; set; }
 
+        /// <summary>
+        /// Date.
+        /// </summary>
         public DateTime Date { get; set; }
 
+        /// <summary>
+        /// Created date.
+        /// </summary>
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
+        /// <summary>
+        /// Title.
+        /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Description.
+        /// </summary>
         public string Description { get; set; }
 
-        public MovementType MovementType { get; set; }
+        /// <summary>
+        /// Movement type.
+        /// </summary>
+        public string MovementType { get; set; }
 
-        public int MovementTypeId { get; set; }
-
+        /// <summary>
+        /// Creator user.
+        /// </summary>
         public ApplicationUser CreatorUser { get; set; }
 
+        /// <summary>
+        /// Creator user id.
+        /// </summary>
         public string CreatorUserId { get; set; }
 
+        /// <summary>
+        /// Tour participants.
+        /// </summary>
         public ICollection<TourParticipant> TourParticipants { get; set; }
     }
 }

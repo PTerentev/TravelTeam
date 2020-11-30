@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TourShortDto } from '../../models/Tour/TourShortDto'
+import { TourDto } from '../../models/Tour/TourDto'
 
 @Component({
   selector: 'app-single-tour',
@@ -7,7 +7,7 @@ import { TourShortDto } from '../../models/Tour/TourShortDto'
   styleUrls: ['./single-tour.component.css']
 })
 export class SingleTourComponent implements OnInit {
-  @Input() tour: TourShortDto;
+  @Input() tour: TourDto;
   
   constructor() { }
 

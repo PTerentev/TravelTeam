@@ -14,7 +14,7 @@ namespace TravelTeam.UseCases.Tour.GetTours
     /// <summary>
     /// Get tours query handler.
     /// </summary>
-    internal class GetToursQueryHandler : IRequestHandler<GetToursQuery, PagedListMetadataDto<TourShortDto>>
+    internal class GetToursQueryHandler : IRequestHandler<GetToursQuery, PagedListMetadataDto<TourDto>>
     {
         private readonly ApplicationDbContext applicationDbContext;
         private readonly IMapper mapper;
@@ -29,7 +29,7 @@ namespace TravelTeam.UseCases.Tour.GetTours
         }
 
         /// <inheritdoc/>
-        public async Task<PagedListMetadataDto<TourShortDto>> Handle(GetToursQuery request, CancellationToken cancellationToken)
+        public async Task<PagedListMetadataDto<TourDto>> Handle(GetToursQuery request, CancellationToken cancellationToken)
         {
             var paged = await EFPagedListFactory
                 .FromSourceAsync(applicationDbContext.Tours
@@ -41,7 +41,7 @@ namespace TravelTeam.UseCases.Tour.GetTours
                                 request.PageSize,
                                 cancellationToken);
 
-            var paged2 = paged.Convert(p => mapper.Map<TourShortDto>(p));
+            var paged2 = paged.Convert(p => mapper.Map<TourDto>(p));
             return paged2.ToMetadataObject();
         }
     }

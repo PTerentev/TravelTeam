@@ -11,7 +11,7 @@ namespace TravelTeam.UseCases.User.Login
         public string UserId { get; set; }
 
         /// <summary>
-        /// New refresh token.
+        /// New token.
         /// </summary>
         public string Token { get; set; }
     }

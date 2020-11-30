@@ -26,10 +26,5 @@ namespace TravelTeam.DataAccess
         /// Tour participants table.
         /// </summary>
         public DbSet<TourParticipant> TourParticipants { get; private set; }
-
-        /// <summary>
-        /// Movement types.
-        /// </summary>
-        public DbSet<MovementType> MovementTypes { get; private set; }
     }
 }

@@ -11,6 +11,11 @@ import { ToursComponent } from './components/tours/tours.component';
 import { SingleTourComponent } from './components/single-tour/single-tour.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }   from '@angular/forms';
+import { SuccessRegisterComponent } from './components/success-register/success-register.component';
+import { AuthGuard } from './auth.guard';
+import { AccountService } from './services/account.service';
+import { TourService } from './services/tour.service';
+import { CreateTourComponent } from './components/create-tour/create-tour.component';
 
 //Angular Material Components
 
@@ -55,7 +60,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     LoginComponent,
     RegisterComponent,
     ToursComponent,
-    SingleTourComponent
+    SingleTourComponent,
+    SuccessRegisterComponent,
+    CreateTourComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +71,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AuthGuard, AccountService, TourService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

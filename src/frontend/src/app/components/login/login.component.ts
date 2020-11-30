@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginUserCommand } from '../../models/Account/LoginUserCommand';
+import { AccountService } from '../../services/account.service';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,10 +13,26 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class LoginComponent implements OnInit {
-
-  constructor() { }
+  command:LoginUserCommand;
+  errors:string = '';
+  constructor(private accountService:AccountService, private router:Router) { }
 
   ngOnInit(): void {
+    this.command = new LoginUserCommand();
+  }
+
+  submit(form: NgForm){
+    this.accountService.login(this.command).subscribe(
+      success => {
+        if (!!success.token) {
+          localStorage.setItem('token', success.token);
+          this.router.navigate(['/']);
+        }
+      },
+      error => {
+
+      }
+    )
   }
 
 }
