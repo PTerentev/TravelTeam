@@ -48,15 +48,11 @@ namespace TravelTeam.Web.Controllers
         /// </summary>
         [Authorize]
         [HttpPost("participate")]
-        public async Task<IActionResult> Participate([Required][FromBody] int tourId, CancellationToken cancellationToken)
+        public async Task<IActionResult> Participate([FromBody] ParticipateInTourCommand participateInTourCommand, CancellationToken cancellationToken)
         {
-            var command = new ParticipateInTourCommand()
-            {
-                TourId = tourId,
-                UserId = GetUserId()
-            };
+            participateInTourCommand.UserId = GetUserId();
 
-            await mediator.Send(command, cancellationToken);
+            await mediator.Send(participateInTourCommand, cancellationToken);
             return StatusCode(200);
         }
 

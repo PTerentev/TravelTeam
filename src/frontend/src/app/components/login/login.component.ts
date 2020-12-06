@@ -26,11 +26,14 @@ export class LoginComponent implements OnInit {
       success => {
         if (!!success.token) {
           localStorage.setItem('token', success.token);
-          this.router.navigate(['/']);
+          localStorage.setItem('userId', success.userId);
+          this.router.navigate(['/']).then(() => {
+            window.location.reload();
+          });
         }
       },
       error => {
-
+        this.errors = 'Ошибка входа!'
       }
     )
   }

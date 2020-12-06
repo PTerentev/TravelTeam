@@ -27,6 +27,11 @@ namespace TravelTeam.Web.Infrastructure.Initialization
 
         private async Task SeedUsers()
         {
+            if (await userManager.FindByEmailAsync(AdminEmail) != null)
+            {
+                return;
+            }
+
             var admin = new ApplicationUser()
             {
                 UserName = "sandman",

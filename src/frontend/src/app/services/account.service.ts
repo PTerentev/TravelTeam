@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router, UrlSerializer } from '@angular/router';
 import { backendUrl } from 'src/environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,7 +23,9 @@ const httpOptions = {
 export class AccountService {
   backendPath:string = "/api/account";
 
-  constructor(private http:HttpClient, private router:Router, private serializer:UrlSerializer) { }
+  constructor(private http:HttpClient, private router:Router,
+     private serializer:UrlSerializer,
+     private jwtHelper: JwtHelperService) { }
 
   register(command:RegisterUserCommand):Observable<any> {
     const url = backendUrl + this.backendPath + '/register'
@@ -34,12 +37,30 @@ export class AccountService {
     return this.http.post<LoginUserCommandResult>(url, command, httpOptions);
   }
 
-  getInfo(query:GetUserInfoQuery):Observable<UserDto> {
-    const url = backendUrl + this.backendPath + `/register/?userId=${query.userId}`;
+  getInfo(userId: string):Observable<UserDto> {
+    const url = backendUrl + this.backendPath + `/get/?userId=${userId}`;
     return this.http.get<UserDto>(url);
   }
 
+  checkToken():Observable<UserDto> {
+    const url = backendUrl + this.backendPath + `/check`;
+    return this.http.get<UserDto>(url, { headers: this.getHeadersWithJwt()});
+  }
+
   loggedIn() {
-    return !!localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+    return !!token && !this.jwtHelper.isTokenExpired(token);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+  }
+
+  getHeadersWithJwt() {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/text')
+      .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+    return headers;
   }
 }

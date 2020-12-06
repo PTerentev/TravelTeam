@@ -51,6 +51,6 @@ namespace TravelTeam.UseCases.Common
         /// <summary>
         /// Tour participants ids.
         /// </summary>
-        public IEnumerable<string> TourParticipantsIds { get; set; }
+        public IEnumerable<UserDto> TourParticipants { get; set; }
     }
 }

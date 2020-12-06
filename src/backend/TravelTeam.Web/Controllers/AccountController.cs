@@ -57,18 +57,17 @@ namespace TravelTeam.Web.Controllers
         }
 
         /// <summary>
-        /// Get user info.
+        /// Get user info by JWT token.
         /// </summary>
         [HttpGet("check")]
         [Authorize]
-        public async Task<bool> CheckToken(CancellationToken cancellationToken)
+        public async Task<UserDto> CheckToken(CancellationToken cancellationToken)
         {
             var userQuery = new GetUserInfoQuery()
             {
                 UserId = GetUserId()
             };
-            var userDto = await mediator.Send(userQuery, cancellationToken);
-            return !string.IsNullOrWhiteSpace(userDto.Username);
+            return await mediator.Send(userQuery, cancellationToken);
         }
 
         private string GetUserId()

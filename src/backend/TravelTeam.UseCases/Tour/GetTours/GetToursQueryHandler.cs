@@ -33,10 +33,9 @@ namespace TravelTeam.UseCases.Tour.GetTours
         {
             var paged = await EFPagedListFactory
                 .FromSourceAsync(applicationDbContext.Tours
-                                .Include(t => t.CreatorUser)
-                                .Include(t => t.TourParticipants)
-                                //.OrderByDescending(t => t.CreatedDate),
-                                ,
+                                //.Include(t => t.CreatorUser)
+                                //.Include(t => t.TourParticipants)
+                                .OrderByDescending(t => t.CreatedDate),
                                 request.Page,
                                 request.PageSize,
                                 cancellationToken);

@@ -33,12 +33,11 @@ namespace TravelTeam.Web
         /// </summary>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSwaggerServices();
             services.AddControllers();
+            services.AddSwaggerServices();
+            services.AddDomainServices(configuration);
             services.AddAuthenticationServices(configuration);
             services.AddConfigurationOptions(configuration);
-            services.AddDomainServices(configuration);
-
             services.AddAsyncInitializer<TestDataInitializer>();
             services.AddCorsPolicy();
             services.AddAutoMapper(typeof(UseCases.Common.UserDto).Assembly);

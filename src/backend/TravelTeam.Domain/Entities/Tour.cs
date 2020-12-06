@@ -52,7 +52,7 @@ namespace TravelTeam.Domain.Entities
         /// <summary>
         /// Creator user.
         /// </summary>
-        public ApplicationUser CreatorUser { get; set; }
+        public virtual ApplicationUser CreatorUser { get; set; }
 
         /// <summary>
         /// Creator user id.
@@ -62,6 +62,6 @@ namespace TravelTeam.Domain.Entities
         /// <summary>
         /// Tour participants.
         /// </summary>
-        public ICollection<TourParticipant> TourParticipants { get; set; }
+        public virtual ICollection<TourParticipant> TourParticipants { get; set; }
     }
 }

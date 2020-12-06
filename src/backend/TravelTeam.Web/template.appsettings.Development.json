@@ -10,7 +10,7 @@
   },
   "JwtOptions": {
     "Audience": "TravelTeamView",
-    "SecretKey": "dasdasdadad2312awd4a3da3ra",
+    "SecretKey": "key",
     "Issuer": "TravelTeam",
     "ExpirationTimeSeconds": 3600,
     "RefreshTokenExpireDays": 15
@@ -22,5 +22,8 @@
     "RequireLowercase": false,
     "RequireUppercase": false,
     "RequireDigit": false
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=;Database=;User ID=;Password=;Integrated Security=False;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True"
   }
 }

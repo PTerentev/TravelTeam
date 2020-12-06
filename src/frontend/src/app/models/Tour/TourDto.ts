@@ -9,4 +9,5 @@ export class TourDto {
     gatheringPlace: string;
     destinationLocation: string;
     creatorUser: UserDto;
+    tourParticipants: UserDto[];
 }

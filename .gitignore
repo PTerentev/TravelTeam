@@ -393,3 +393,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/src/backend/TravelTeam.Web/appsettings.Development.json

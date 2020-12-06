@@ -36,18 +36,26 @@ namespace TravelTeam.UseCases.Tour.CreateTour
             {
                 throw new DomainException("Only authorized users can create tours!");
             }
-
             var tour = mapper.Map<Domain.Entities.Tour>(request);
 
-            applicationDbContext.Tours.Add(tour);
-
-            applicationDbContext.TourParticipants.Add(new Domain.Entities.TourParticipant()
+            await using var transaction = await applicationDbContext.Database.BeginTransactionAsync();
+            try
             {
-                TourId = tour.Id,
-                UserId = tour.CreatorUserId
-            });
+                applicationDbContext.Tours.Add(tour);
+                await applicationDbContext.SaveChangesAsync();
+                applicationDbContext.TourParticipants.Add(new Domain.Entities.TourParticipant()
+                {
+                    TourId = tour.Id,
+                    UserId = tour.CreatorUserId
+                });
+                await applicationDbContext.SaveChangesAsync();
 
-            await applicationDbContext.SaveChangesAsync(cancellationToken);
+                await transaction.CommitAsync();
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+            }
 
             logger.LogTrace("A tour with id: {id} was created.", tour.Id);
             return new IdResult<int>(tour.Id);

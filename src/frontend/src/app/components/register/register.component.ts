@@ -32,6 +32,9 @@ export class RegisterComponent implements OnInit {
           if (result.id !== undefined) {
             this.router.navigateByUrl("/login");
           }
+        },
+        error => {
+          this.errors = 'Ошибка регистрации!'
         }
       )
     }

@@ -19,12 +19,12 @@ namespace TravelTeam.Web.Infrastructure.ServiceExtensions
         {
             services.AddDbContextPool<ApplicationDbContext>(options =>
             {
-                options.UseInMemoryDatabase("develop");
+                options.UseLazyLoadingProxies();
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             var passwordSettings = new PasswordOptions();
             configuration.Bind("PasswordSettings", passwordSettings);

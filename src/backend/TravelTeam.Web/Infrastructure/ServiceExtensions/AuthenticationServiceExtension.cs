@@ -45,15 +45,6 @@ namespace TravelTeam.Web.Infrastructure.ServiceExtensions
                     context.Response.StatusCode = StatusCodes.Status401Unauthorized;
                     return Task.CompletedTask;
                 };
-            })
-            .AddCookie(options =>
-            {
-                options.Events.OnRedirectToAccessDenied =
-                options.Events.OnRedirectToLogin = c =>
-                {
-                    c.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                    return Task.FromResult<object>(null);
-                };
             });
 
             return services;

@@ -16,6 +16,7 @@ import { AuthGuard } from './auth.guard';
 import { AccountService } from './services/account.service';
 import { TourService } from './services/tour.service';
 import { CreateTourComponent } from './components/create-tour/create-tour.component';
+import { JwtModule } from "@auth0/angular-jwt";
 
 //Angular Material Components
 
@@ -53,6 +54,17 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 */
 
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+import { AccountProfileComponent } from './components/account-profile/account-profile.component';
+import { TourDetailsComponent } from './components/tour-details/tour-details.component';
+
+registerLocaleData(localeRu, 'ru');
+
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,14 +74,21 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     ToursComponent,
     SingleTourComponent,
     SuccessRegisterComponent,
-    CreateTourComponent
+    CreateTourComponent,
+    AccountProfileComponent,
+    TourDetailsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter
+      }
+    })
   ],
   providers: [AuthGuard, AccountService, TourService],
   bootstrap: [AppComponent]
