@@ -7,6 +7,8 @@ using MediatR;
 using Saritasa.Tools.Domain.Exceptions;
 using TravelTeam.DataAccess;
 using TravelTeam.UseCases.Common;
+using System;
+using System.Collections.Generic;
 
 namespace TravelTeam.UseCases.Tour.CreateTour
 {
@@ -32,6 +34,12 @@ namespace TravelTeam.UseCases.Tour.CreateTour
         /// <inheritdoc/>
         public async Task<IdResult<int>> Handle(CreateTourCommand request, CancellationToken cancellationToken)
         {
+            if (request.Date.ToUniversalTime() < DateTime.UtcNow)
+            {
+                var errors = new Dictionary<string, string>() { { "Tour date", "The tour`s date cannot be in the past!" } };
+                throw new ValidationException(errors);
+            }
+
             if (! await applicationDbContext.Users.AnyAsync(u => u.Id == request.CreatorUserId, cancellationToken))
             {
                 throw new DomainException("Only authorized users can create tours!");

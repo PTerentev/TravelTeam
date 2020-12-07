@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
   command:RegisterUserCommand;
   repeatPassword:string = '';
-  errors:string = '';
+  errors:string[];
 
   constructor(private accountService:AccountService, private router:Router) { }
 
@@ -29,27 +29,32 @@ export class RegisterComponent implements OnInit {
     if (this.validate()) {
       this.accountService.register(this.command).subscribe(
         result => {
-          if (result.id !== undefined) {
+          if (!!!result.id) {
             this.router.navigateByUrl("/login");
           }
         },
         error => {
-          this.errors = 'Ошибка регистрации!'
+          console.log(error);
+          this.errors = ['Ошибка регистрации!'];
+          this.errors = this.errors.concat(this.parseBadResponse(error));
         }
       )
     }
-    console.log(this.command);
   }
 
   validate():Boolean {
     if (this.command.password != this.repeatPassword)
     {
-      this.errors = "Пароли не совпадают!";
+      this.errors = ["Пароли не совпадают!"];
       console.log("pwd error");
       return false;
     }
 
     return true;
+  }
+
+  parseBadResponse(response: any): string[] {
+    return response.error.Extensions.errors[0].Messages;
   }
 
 }

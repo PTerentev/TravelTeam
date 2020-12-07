@@ -36,6 +36,6 @@ export class AccountProfileComponent implements OnInit {
   }
 
   checkLogin(accountId: string): boolean {
-    return accountId === localStorage.getItem('userId');
+    return accountId === localStorage.getItem('userId') && this.accountService.loggedIn();
   }
 }

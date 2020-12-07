@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class CreateTourComponent implements OnInit {
   command: CreateTourCommand;
+  errors: string[];
   constructor(private tourService: TourService,
               private router: Router) { }
 
@@ -23,10 +24,19 @@ export class CreateTourComponent implements OnInit {
     this.tourService.createTour(this.command).subscribe(
       result => {
         if (!!result.id) {
-          this.router.navigate(['/']);
+          this.router.navigate(['/tour'], { queryParams: { id:result.id }});
         }
+      },
+      error => {
+        console.log(error);
+        this.errors = ['Ошибка регистрации!'];
+        this.errors = this.errors.concat(this.parseBadResponse(error));
       }
     )
+  }
+
+  parseBadResponse(response: any): string[] {
+    return response.error.Extensions.errors[0].Messages;
   }
 
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Drawing;
 using MediatR;
 using TravelTeam.UseCases.Common;
 
@@ -14,6 +13,7 @@ namespace TravelTeam.UseCases.Tour.CreateTour
         /// <summary>
         /// Destination location.
         /// </summary>
+        [Required]
         public string DestinationLocation { get; set; }
 
         /// <summary>
@@ -42,7 +42,6 @@ namespace TravelTeam.UseCases.Tour.CreateTour
         /// <summary>
         /// Movement type ID.
         /// </summary>
-        [Required]
         public string MovementType { get; set; }
 
         /// <summary>
