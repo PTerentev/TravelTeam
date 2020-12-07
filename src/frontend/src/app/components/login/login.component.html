@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="d-flex justify-content-center">
+    <div class="form-signin">
+      <form #loginForm="ngForm">
+        <div class="text-center mb-4">
+          <h1 class="h3 mb-3 font-weight-normal">Войти в аккаунт</h1>
+        </div>
+        <div class="form-label-group">
+          <input type="email" id="inputEmail" name="email" [(ngModel)]="command.email" class="form-control" placeholder="Email address" required autofocus>
+          <label for="inputEmail">Email address</label>
+        </div>
+        <div class="form-label-group">
+          <input type="password" id="inputPassword" name="password" [(ngModel)]="command.password" class="form-control" placeholder="Password" required>
+          <label for="inputPassword">Password</label>
+        </div>
+        <button 
+          [disabled]="loginForm.invalid"
+          class="mt-4 btn btn-lg btn-primary btn-block" 
+          type="submit" (click)="submit(loginForm)">Войти</button>
+      </form>
+      <p class="mt-3">Нет аккаунта? <a routerLink="/register">Зарегистрироваться</a></p>
+      <div class="mt-2 text-danger">
+        <p>{{errors}}</p>
+      </div>
+    </div>
+  </div>
+</div>

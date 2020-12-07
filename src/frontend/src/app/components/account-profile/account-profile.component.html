@@ -1,0 +1,139 @@
+<div class="container">
+    <div class="row my-5 d-flex justify-content-center">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Профиль</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Сообщения</a>
+                </li>
+                <li *ngIf="loggedIn" class="nav-item">
+                    <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Изменить</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h5 class="mb-3">Профиль пользователя</h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h6>Юзернейм</h6>
+                            <p>{{ user.username }}</p>
+                            <h6>Имя пользователя</h6>
+                            <p>{{ user.firstName }} {{ user.lastName }}</p>
+                            <h6>Личная информация</h6>
+                            <p>{{ user.about }}</p>
+                            <h6>Номер телефона</h6>
+                            <p>{{ user.phoneNumber }}</p>
+                            <h6>Почта</h6>
+                            <p>{{ user.email }}</p>
+                        </div>
+                    </div>
+                    <!--/row-->
+                </div>
+                <div class="tab-pane" id="messages">
+                    <div class="alert alert-info alert-dismissable">
+                        <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
+                    </div>
+                    <table class="table table-hover table-striped">
+                        <tbody>                                    
+                            <tr>
+                                <td>
+                                   <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros. 
+                                </td>
+                            </tr>
+                        </tbody> 
+                    </table>
+                </div>
+                <div *ngIf="loggedIn" class="tab-pane" id="edit">
+                    <form role="form">
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Имя</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Фамилия</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Почта</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Описание</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text" value="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Номер телефона</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Город</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Пароль</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label">Подтверждение пароля</label>
+                            <div class="col-lg-9">
+                                <input class="form-control" type="password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label form-control-label"></label>
+                            <div class="col-lg-9">
+                                <input type="button" class="btn btn-primary" value="Сохранить изменения">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img src="../../assets/images/defaultAvatar.png" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <div *ngIf="loggedIn">
+                <h6 class="mt-2">Загрузить другое фото</h6>
+                <label class="custom-file">
+                    <input type="file" id="file" class="custom-file-input">
+                    <span class="custom-file-control">Выбрать файл</span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
