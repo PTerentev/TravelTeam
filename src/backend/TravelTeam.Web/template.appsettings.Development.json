@@ -1,0 +1,29 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AppSettings": {
+  },
+  "JwtOptions": {
+    "Audience": "TravelTeamView",
+    "SecretKey": "key",
+    "Issuer": "TravelTeam",
+    "ExpirationTimeSeconds": 3600,
+    "RefreshTokenExpireDays": 15
+  },
+  "PasswordSettings": {
+    "RequiredLength": 4,
+    "RequiredUniqueChars": 1,
+    "RequireNonAlphanumeric": false,
+    "RequireLowercase": false,
+    "RequireUppercase": false,
+    "RequireDigit": false
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=;Database=;User ID=;Password=;Integrated Security=False;MultipleActiveResultSets=true;Encrypt=True;TrustServerCertificate=True"
+  }
+}
