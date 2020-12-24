@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading;
@@ -11,6 +11,7 @@ using TravelTeam.UseCases.Common;
 using TravelTeam.UseCases.Tour.CreateTour;
 using TravelTeam.UseCases.Tour.GetTourById;
 using TravelTeam.UseCases.Tour.GetTours;
+using TravelTeam.UseCases.Tour.GetToursByUser;
 using TravelTeam.UseCases.Tour.ParticipateInTour;
 
 namespace TravelTeam.Web.Controllers
@@ -54,6 +55,21 @@ namespace TravelTeam.Web.Controllers
 
             await mediator.Send(participateInTourCommand, cancellationToken);
             return StatusCode(200);
+        }
+
+        /// <summary>
+        /// Get tours.
+        /// </summary>
+        [Authorize]
+        [HttpGet("get-by-user")]
+        public async Task<IEnumerable<TourDto>> GetByUser(CancellationToken cancellationToken)
+        {
+            var query = new GetToursByUserQuery()
+            {
+                UserId = GetUserId()
+            };
+
+            return await mediator.Send(query, cancellationToken);
         }
 
         /// <summary>
