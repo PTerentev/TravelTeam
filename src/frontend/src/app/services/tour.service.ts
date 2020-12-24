@@ -36,6 +36,12 @@ export class TourService {
     return this.http.get<TourDto>(url);
   }
 
+  getTourByUser(): Observable<TourDto[]> {
+    const url = backendUrl + this.backendPath + `/get-by-user`;
+    console.log(url);
+    return this.http.get<TourDto[]>(url, { headers: this.getHeadersWithJwt()});
+  }
+
   createTour(command:CreateTourCommand):Observable<any> {
     const url = backendUrl + this.backendPath + '/create';
     return this.http.post<any>(url, command, { headers: this.getHeadersWithJwt()});

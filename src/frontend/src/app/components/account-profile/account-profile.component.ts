@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Result } from 'src/app/models/Result';
+import { TourDto } from 'src/app/models/Tour/TourDto';
 import { UserDto } from 'src/app/models/UserDto';
 import { AccountService } from 'src/app/services/account.service';
+import { TourService } from 'src/app/services/tour.service';
 
 @Component({
   selector: 'app-account-profile',
@@ -10,9 +11,11 @@ import { AccountService } from 'src/app/services/account.service';
   styleUrls: ['./account-profile.component.css']
 })
 export class AccountProfileComponent implements OnInit {
+  tours: TourDto[];
   loggedIn: boolean;
   user: UserDto = new UserDto();
   constructor(private accountService: AccountService,
+              private tourService: TourService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -24,6 +27,11 @@ export class AccountProfileComponent implements OnInit {
     }
 
     this.loggedIn = this.checkLogin(accountId);
+
+    if(this.loggedIn)
+    {
+      this.getTours();
+    }
 
     this.accountService.getInfo(accountId).subscribe(
       user => {
@@ -37,5 +45,13 @@ export class AccountProfileComponent implements OnInit {
 
   checkLogin(accountId: string): boolean {
     return accountId === localStorage.getItem('userId') && this.accountService.loggedIn();
+  }
+
+  getTours() {
+    this.tourService.getTourByUser().subscribe(
+      result => {
+        this.tours = result;
+      }
+    )
   }
 }

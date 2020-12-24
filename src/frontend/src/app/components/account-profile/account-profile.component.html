@@ -5,6 +5,9 @@
                 <li class="nav-item">
                     <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Профиль</a>
                 </li>
+                <li *ngIf="loggedIn" class="nav-item">
+                    <a href="" data-target="#tours" data-toggle="tab" class="nav-link">Ваши туры</a>
+                </li>
                 <li class="nav-item">
                     <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Сообщения</a>
                 </li>
@@ -64,6 +67,16 @@
                             </tr>
                         </tbody> 
                     </table>
+                </div>
+                <div *ngIf="loggedIn" class="tab-pane" id="tours">
+                    <div *ngFor="let tour of tours" class="my-3">
+                        <div>
+                            <h5>{{tour.title}}  (<a href="/tour?id={{tour.id}}">подробнее</a>)</h5>
+                            <div class="ml-3" *ngFor="let user of tour.tourParticipants">
+                                <a href="/profile?id={{user.id}}">  {{ user.firstName }} {{ user.email }} {{ user.username }}</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div *ngIf="loggedIn" class="tab-pane" id="edit">
                     <form role="form">

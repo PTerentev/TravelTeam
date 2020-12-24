@@ -144,7 +144,9 @@
             </div>
         </div>
         <div class="col-lg-4 order-lg-1 text-center">
-            <img src="../../assets/images/defaultAvatar.png" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <a href="/profile?id={{tour.creatorUser.id}}">
+                <img src="../../assets/images/defaultAvatar.png" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            </a>
             <h5>{{ tour.creatorUser.username }}</h5>
             <h6>{{ tour.creatorUser.firstName }} {{ tour.creatorUser.lastName }}</h6>
             <h6>City</h6>
